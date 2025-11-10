@@ -1,0 +1,31 @@
+# Server Configuration
+server.port=8080
+server.servlet.context-path=/
+
+# Database Configuration
+spring.datasource.url=jdbc:mariadb://localhost:3306/farmacia_db
+spring.datasource.username=farmacia_user
+spring.datasource.password=farmacia123
+spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
+
+# JPA Configuration
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MariaDBDialect
+spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.properties.hibernate.jdbc.time_zone=America/Mexico_City
+
+# JWT Configuration
+jwt.secret=miClaveSecretaSuperSeguraParaJWT2024FarmaciaSystemDeAdministracion
+jwt.expiration=86400000
+
+# Swagger Configuration
+springdoc.api-docs.path=/api-docs
+springdoc.swagger-ui.path=/swagger-ui.html
+springdoc.swagger-ui.operationsSorter=method
+springdoc.swagger-ui.tagsSorter=alpha
+
+# Logging
+logging.level.com.farmacia=DEBUG
+logging.level.org.springframework.security=DEBUG
+logging.file.name=logs/farmacia-system.log
