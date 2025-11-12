@@ -1,0 +1,95 @@
+@startuml
+!theme plain
+
+package com.farmacia.entity {
+  class Usuario {
+    - Long id
+    - String username
+    - String password
+    - String email
+    - String role
+    - Boolean activo
+    - LocalDateTime fechaCreacion
+    + Usuario()
+    + Usuario(String, String, String, String)
+  }
+
+  class Cliente {
+    - Long id
+    - String nombre
+    - String email
+    - String telefono
+    - String direccion
+    - LocalDateTime fechaCreacion
+    - Boolean activo
+    + Cliente()
+    + Cliente(String, String, String, String)
+  }
+
+  class Doctor {
+    - Long id
+    - String nombre
+    - String especialidad
+    - String cedulaProfesional
+    - String telefono
+    - String consultorio
+    - Boolean activo
+    - LocalDateTime fechaRegistro
+    + Doctor()
+    + Doctor(String, String, String, String, String)
+  }
+
+  class Medicamento {
+    - Long id
+    - String nombre
+    - String descripcion
+    - String laboratorio
+    - String principioActivo
+    - BigDecimal precio
+    - Integer stock
+    - Boolean requiereReceta
+    - Boolean activo
+    - LocalDateTime fechaCreacion
+    + Medicamento()
+    + Medicamento(String, String, String, String, BigDecimal, Integer, Boolean)
+  }
+
+  class Receta {
+    - Long id
+    - LocalDate fechaEmision
+    - LocalDate fechaVencimiento
+    - String diagnostico
+    - String indicaciones
+    - Boolean utilizada
+    - LocalDateTime fechaCreacion
+    + Receta()
+    + Receta(LocalDate, LocalDate, String, String, Doctor, Cliente)
+  }
+
+  class Venta {
+    - Long id
+    - LocalDateTime fecha
+    - BigDecimal total
+    + Venta()
+    + Venta(BigDecimal, Cliente, Receta, Usuario)
+  }
+
+  class DetalleVenta {
+    - Long id
+    - Integer cantidad
+    - BigDecimal precioUnitario
+    - BigDecimal subtotal
+    + DetalleVenta()
+    + DetalleVenta(Venta, Medicamento, Integer, BigDecimal)
+  }
+
+  Usuario "1" -- "*" Venta
+  Cliente "1" -- "*" Venta
+  Cliente "1" -- "*" Receta
+  Doctor "1" -- "*" Receta
+  Receta "0..1" -- "*" Venta
+  Venta "1" -- "*" DetalleVenta
+  Medicamento "1" -- "*" DetalleVenta
+}
+
+@enduml
